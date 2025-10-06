@@ -1,4 +1,31 @@
+
 @import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap");
+
+@theme {
+  --font-sans: "Outfit", sans-serif;
+}
+@layer utilities {
+  .hide-scrollbar::-webkit-scrollbar {
+  display: none;             
+}
+ 
+}
+@keyframes slideGradient {
+  0% {
+    background-position: -800px 0px;
+  }
+  100% {
+    background-position: 800px 0px; 
+  }
+}
+
+.hr-animated {
+  animation: slideGradient 3s linear infinite;
+  
+}
+
+
 
 /* *{
   padding: 0;

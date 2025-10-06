@@ -15,7 +15,7 @@ export default function Sidebar() {
   const bottomSideBarItems = [
     {
       icon: QuestionIcon,
-      text: "New Chat",
+      text: "Help",
     },
     {
       icon: ClockIcon,
@@ -39,7 +39,7 @@ export default function Sidebar() {
           <div className=" flex flex-col ">
             <p className="mt-[30px] mb-[30px]">Recent</p>
             {/* Recent Entry */}
-            <div className="flex items-start gap-2.5 p-2.5 pr-10 rounded-full text-[#282828] cursor-pointer hover:bg-[#e2e6eb]">
+            <div className="inline-flex  items-center gap-2.5 p-2.5 pr-10 rounded-full text-[#282828] cursor-pointer hover:bg-[#e2e6eb]">
               <MessageIcon className="w-5 h-5" />
               <p>What Is React ....</p>
             </div>
@@ -53,7 +53,7 @@ export default function Sidebar() {
           const Icon = item.icon;
           return (
             <div
-              className="flex items-start gap-2.5 p-2.5 pr-10 rounded-full text-[#282828] cursor-pointer hover:bg-[#e2e6eb] "
+              className="inline-flex items-center gap-2.5 p-2.5 pr-10 rounded-full text-[#282828] cursor-pointer hover:bg-[#e2e6eb] "
               key={index}
             >
               <Icon className="w-5 h-5" />
