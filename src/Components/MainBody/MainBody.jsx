@@ -43,7 +43,7 @@ export default function MainBody() {
   const inputIcon = [{ icon: SendIcon, onClick: () => onSent() }];
   return (
     /* Main */
-    <div className="flex-1 min-h-screen pb-[15vh] relative">
+    <div className="flex-1 min-h-screen pb-[20vh] relative">
       {/* Nav */}
       <div className="flex items-center justify-between text-[22px] p-5 text-[#585858]">
         <p>Gemini</p>
@@ -124,7 +124,7 @@ export default function MainBody() {
         )}
 
         {/* Main Bottom */}
-        <div className="absolute bottom-0 w-full max-w-[900px] py-0 px-[20px] mx-auto">
+        <div className="absolute bottom-0 w-full max-w-[900px] py-0 px-[20px] mx-auto  ">
           {/* Search Box */}
           <div className="flex items-center justify-between gap-5  bg-[#f0f4f9] sm:py-2.5 sm:px-5 py-[5px] px-[10px] rounded-[50px]">
             <input
