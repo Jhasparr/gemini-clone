@@ -40,11 +40,7 @@ export default function MainBody() {
     },
   ];
   const hr = [{ id: 1 }, { id: 2 }, { id: 3 }];
-  const inputIcon = [
-    { icon: GalleryIcon, onClick: () => onSent() },
-    { icon: MicrophoneIcon, onClick: () => onSent() },
-    { icon: SendIcon, onClick: () => onSent() },
-  ];
+  const inputIcon = [{ icon: SendIcon, onClick: () => onSent() }];
   return (
     /* Main */
     <div className="flex-1 min-h-screen pb-[15vh] relative">
@@ -118,7 +114,10 @@ export default function MainBody() {
                   ))}
                 </div>
               ) : (
-                <p dangerouslySetInnerHTML={{ __html: resultData }} className="text-[17px] font-light leading-[1.8]"></p>
+                <p
+                  dangerouslySetInnerHTML={{ __html: resultData }}
+                  className="text-[17px]  leading-[1.8]"
+                ></p>
               )}
             </div>
           </div>
@@ -127,25 +126,21 @@ export default function MainBody() {
         {/* Main Bottom */}
         <div className="absolute bottom-0 w-full max-w-[900px] py-0 px-[20px] mx-auto">
           {/* Search Box */}
-          <div className="flex items-center justify-between gap-5 bg-[#f0f4f9] py-2.5 px-5 rounded-[50px]">
+          <div className="flex items-center justify-between gap-5  bg-[#f0f4f9] sm:py-2.5 sm:px-5 py-[5px] px-[10px] rounded-[50px]">
             <input
               onChange={(e) => setInput(e.target.value)}
               value={input}
               type="text"
               placeholder="Enter a prompt here"
-              className="flex-1 bg-transparent border-none outline-none p-2 text-[18px]"
+              className="sm:flex-1 flex-none bg-transparent border-none outline-none p-2 text-[18px]"
             />
-            <div className="flex items-center justify-between gap-2">
-              {inputIcon.map((item, index) => {
-                const IconName = item.icon;
-                return (
-                  <IconName
-                    key={index}
-                    className="w-[24px] h-[24px] cursor-pointer"
-                    onClick={item.onClick}
-                  />
-                );
-              })}
+            <div className="flex items-center justify-between gap-[5px] sm:gap-2">
+              {input ? (
+                <SendIcon
+                  className="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] cursor-pointer"
+                  onClick= {() => onSent() }
+                />
+              ) : null}
             </div>
           </div>
           {/* Bottom Info */}

@@ -19,6 +19,18 @@
     background-position: 800px 0px; 
   }
 }
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 100;
+  }
+}
+
+.fadeIn {
+  animation: fadeIn 1.5s; 
+}
 
 .hr-animated {
   animation: slideGradient 3s linear infinite;
