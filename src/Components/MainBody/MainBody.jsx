@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   CodeIcon,
   CompassIcon,
@@ -6,17 +6,23 @@ import {
   LightBulbIcon,
   MessageIcon,
   MicrophoneIcon,
+  MoonIcon,
   SendIcon,
+  SunIcon,
 } from "../Icons";
 import { Context } from "../../Context/context";
+import useDarkMode from "./Darkmode";
 
 export default function MainBody() {
+  const [dark, setDark] = useDarkMode();
+
   const {
     onSent,
     recentPrompt,
     showResult,
     loading,
     resultData,
+    setPrevPrompt,
     setInput,
     input,
   } = useContext(Context);
@@ -43,16 +49,26 @@ export default function MainBody() {
   const inputIcon = [{ icon: SendIcon, onClick: () => onSent() }];
   return (
     /* Main */
-    <div className="flex-1 min-h-screen pb-[20vh] relative">
+    <div className="flex-1 min-h-screen pb-[20vh] relative dark:[background:linear-gradient(180deg,#0a0a0a,#1f1f1f,#0a0a0a)] ">
       {/* Nav */}
-      <div className="flex items-center justify-between text-[22px] p-5 text-[#585858]">
-        <p>Gemini</p>
+      <div className="flex items-center justify-between text-[22px] p-5 text-[#585858] dark:text-white">
+        <div className="flex items-center gap-3">
+          <p>Gemini</p>
+          <div className="rounded-lg p-1 shadow border-2 dark:border-gray-600">
+            <div onClick={() => setDark(!dark)} >
+            {dark ? <MoonIcon /> : <SunIcon />}
+          </div>
+
+          </div>
+          
+        </div>
+
         <img
           src="user.jpg"
           alt="user_image"
           width={30}
           height={10}
-          className="rounded-full"
+          className="rounded-full dark:bg-black"
         />
       </div>
       {/* Main Container */}
@@ -74,11 +90,17 @@ export default function MainBody() {
                 const IconName = item.icon;
                 return (
                   <div
-                    className="h-[200px] p-[15px] relative cursor-pointer bg-[#f0f4f9] rounded-lg hover:bg-[#dfe4ea]"
+                    className="h-[200px] p-[15px] relative cursor-pointer bg-[#f0f4f9] rounded-lg dark:hover:bg-gray-800 hover:bg-[#dfe4ea] dark:bg-gray-600 "
+                    onClick={() => {
+                      setInput(item.text);
+                      setPrevPrompt((prev) => [...prev, item.text]);
+
+                      onSent(item.text);
+                    }}
                     key={index}
                   >
-                    <p className=" text-[#585858] text-[17px]"> {item.text}</p>
-                    <IconName className="w-[35px] h-[35px] p-[5px] absolute rounded-[20px] bottom-2.5 right-2.5 bg-white" />
+                    <p className="dark:text-white text-[#585858] text-[17px]"> {item.text}</p>
+                    <IconName className="w-[35px] h-[35px] p-[5px] absolute rounded-[20px] bottom-2.5 right-2.5 bg-white " />
                   </div>
                 );
               })}
@@ -94,7 +116,7 @@ export default function MainBody() {
                 height={10}
                 className="rounded-full"
               />
-              <p>{recentPrompt}</p>
+              <p className="dark:text-white">{recentPrompt}</p>
             </div>
             <div className="flex items-start gap-5">
               <img
@@ -116,7 +138,7 @@ export default function MainBody() {
               ) : (
                 <p
                   dangerouslySetInnerHTML={{ __html: resultData }}
-                  className="text-[17px]  leading-[1.8]"
+                  className="text-[17px]  dark:text-white leading-[1.8]"
                 ></p>
               )}
             </div>
@@ -126,25 +148,31 @@ export default function MainBody() {
         {/* Main Bottom */}
         <div className="absolute bottom-0 w-full max-w-[900px] py-0 px-[20px] mx-auto  ">
           {/* Search Box */}
-          <div className="flex items-center justify-between gap-5  bg-[#f0f4f9] sm:py-2.5 sm:px-5 py-[5px] px-[10px] rounded-[50px]">
+          <div className="flex items-center justify-between gap-5  bg-[#f0f4f9] sm:py-2.5 sm:px-5 py-[5px] px-[10px] dark:bg-gray-600 rounded-[50px]">
             <input
               onChange={(e) => setInput(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && input.trim() !== "") {
+                  e.preventDefault();
+                  onSent();
+                }
+              }}
               value={input}
               type="text"
               placeholder="Enter a prompt here"
-              className="sm:flex-1 flex-none bg-transparent border-none outline-none p-2 text-[18px]"
+              className="flex-1 dark:text-white border-none outline-none p-2  text-[18px]"
             />
             <div className="flex items-center justify-between gap-[5px] sm:gap-2">
               {input ? (
                 <SendIcon
                   className="w-[20px] h-[20px] sm:w-[24px] sm:h-[24px] cursor-pointer"
-                  onClick= {() => onSent() }
+                  onClick={() => onSent()}
                 />
               ) : null}
             </div>
           </div>
           {/* Bottom Info */}
-          <p className="text-[13px] text-[#585858] my-[15px] mx-auto text-center font-light">
+          <p className="text-[13px] text-[#585858] my-[15px] mx-auto text-center font-light dark:text-gray-300">
             Gemini may display inaccurate info, including about people, so
             double-check its responses. Your privacy and Gemini Apps
           </p>

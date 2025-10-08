@@ -31,15 +31,15 @@ export default function Sidebar() {
   ];
 
   return (
-    <div className=" min-h-screen hidden  sm:inline-flex flex-col justify-between bg-[#f0f4f9] py-[25px] px-[15px] ">
+    <div className=" min-h-screen hidden  sm:inline-flex flex-col justify-between bg-[#f0f4f9] py-[25px] px-[15px] dark:bg-black ">
       {/* Top */}
       <div className="top ">
         <MenuIcon
-          className="w-5 h-5 block ml-2.5 cursor-pointer"
+          className="w-5 h-5 block ml-2.5 dark:text-white cursor-pointer"
           onClick={() => setOpen((prev) => !prev)}
         />
         {/* New Chat */}
-        <div onClick={()=>newChat()} className=" mt-[50px] inline-flex items-center gap-2.5 py-2.5 px-[15px] bg-[#e6eaf1] rounded-full text-[14px] text-gray-600 cursor-pointer">
+        <div onClick={()=>newChat()} className=" mt-[50px] inline-flex items-center gap-2.5 py-2.5 px-[15px] bg-[#e6eaf1] dark:bg-gray-600 rounded-full text-[14px] text-gray-600 dark:hover:bg-gray-700 dark:text-white cursor-pointer">
           <PlusIcon className="w-5 h-5 " />
           {open ? <p>New Chat</p>: null}
         </div>
@@ -50,9 +50,9 @@ export default function Sidebar() {
             {/* Recent Entry */}
             {prevPrompt.map((item, index) => {
               return (
-                <div className="inline-flex  items-center gap-2.5 p-2.5 pr-10 rounded-full text-[#282828] cursor-pointer hover:bg-[#e2e6eb]" onClick={() => loadPrompt(item)}>
+                <div className="inline-flex  items-center gap-2.5 p-2.5 pr-10 rounded-full text-[#282828] dark:hover:bg-gray-800 cursor-pointer hover:bg-[#e2e6eb]" onClick={() => loadPrompt(item)}>
                   <MessageIcon className="w-5 h-5" />
-                  <p>{item.slice(0,18)} ...</p>
+                  <p className="dark:text-white  ">{item.slice(0,18)} ...</p>
                 </div>
               );
             })}
@@ -66,7 +66,7 @@ export default function Sidebar() {
           const Icon = item.icon;
           return (
             <div
-              className="inline-flex items-center gap-2.5 p-2.5 pr-10 rounded-full text-[#282828] cursor-pointer hover:bg-[#e2e6eb] "
+              className="inline-flex items-center gap-2.5 p-2.5 pr-10 rounded-full text-[#282828] dark:hover:bg-gray-800 dark:text-white cursor-pointer hover:bg-[#e2e6eb] "
               key={index}
             >
               <Icon className="w-5 h-5" />

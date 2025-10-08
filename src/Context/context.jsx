@@ -36,7 +36,7 @@ const ContextProvider = (props) => {
         setRecentPrompt(input);
         response = await main(input);
     }
-    
+    /* Remove Unnessary * */
     let responseArray = response.split("**");
     let newResponse = "";
     for (let i = 0; i < responseArray.length; i++) {
@@ -46,8 +46,11 @@ const ContextProvider = (props) => {
         newResponse += "<b>" + responseArray[i] + "</b>";
       }
     }
+    /* Line breaks after 3rd * */
+ 
     let newResponse2 = newResponse.split("*").join("</br>");
     let newResponseArray = newResponse2.split(" ");
+       /* Print Animation */
     for (let i = 0; i < newResponseArray.length; i++) {
         const nextWord = newResponseArray[i];
         delayPara(i, nextWord+" ");
