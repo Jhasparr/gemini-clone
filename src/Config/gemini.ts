@@ -2,12 +2,12 @@
 // npm install @google/genai mime
 // npm install -D @types/node
 
-import {
-  Chat,
-  GoogleGenAI,
-} from '@google/genai';
-import mime from 'mime';
-import { writeFile } from 'fs';
+
+import { Chat, GoogleGenAI } from "@google/genai";
+
+
+import mime from "mime";
+import { writeFile } from "fs";
 
 // function saveBinaryFile(fileName: string, content: Buffer) {
 //   writeFile(fileName, content, 'utf8', (err) => {
@@ -16,23 +16,21 @@ import { writeFile } from 'fs';
 //       return;
 //     }
 //     console.log(`File ${fileName} saved to file system.`);
-//   });
+// //   });
+//
 // }
 
 export default async function main(prompt: string) {
   const ai = new GoogleGenAI({
-    apiKey: "AIzaSyA_sPSCuqCZgbZo1ic8hFvKGmocmZb1Kzc",
+    apiKey: import.meta.env.VITE_GOOGLE_API_KEY,
   });
   const config = {
-    responseModalities: [
-        'IMAGE',
-        'TEXT',
-    ],
+    responseModalities: ["IMAGE", "TEXT"],
   };
-  const model = 'gemini-2.5-flash-image';
+  const model = "gemini-2.5-flash-image";
   const contents = [
     {
-      role: 'user',
+      role: "user",
       parts: [
         {
           text: prompt,
@@ -40,16 +38,15 @@ export default async function main(prompt: string) {
       ],
     },
   ];
-  
 
   const response = await ai.models.generateContent({
     model,
     config,
     contents,
   });
-  const result = response.text
+  const result = response.text;
   const output = `Q: ${prompt}\nA: ${result}`;
-  console.log(output)
+  console.log(output);
   return response.text;
   let fileIndex = 0;
   // for await (const chunk of response) {
